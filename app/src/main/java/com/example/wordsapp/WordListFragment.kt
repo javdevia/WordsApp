@@ -23,7 +23,7 @@ class WordListFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        title = getString(R.string.detail_prefix) + " " + letterId
+        //title = getString(R.string.detail_prefix) + " " + letterId
 
     }
 
@@ -42,7 +42,7 @@ class WordListFragment : Fragment() {
         // Retrieve the LETTER from the Intent extras
         // intent.extras.getString returns String? (String or null)
         // so toString() guarantees that the value will be a String
-        val letterId = activity.intent?.extras?.getString(LETTER).toString()
+        val letterId = activity?.intent?.extras?.getString(LETTER).toString()
 
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = WordAdapter(letterId, this.requireContext())
@@ -50,6 +50,7 @@ class WordListFragment : Fragment() {
         // Adds a [DividerItemDecoration] between items
         recyclerView.addItemDecoration(
             DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
+        )
     }
 
     override fun onDestroy() {
