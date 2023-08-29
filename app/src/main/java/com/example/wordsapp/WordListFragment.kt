@@ -20,11 +20,14 @@ class WordListFragment : Fragment() {
     private var _binding: FragmentWordListBinding? = null
     private val binding get() = _binding!!
     lateinit var recyclerView: RecyclerView
+    private lateinit var letterId: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //title = getString(R.string.detail_prefix) + " " + letterId
 
+        arguments?.let{
+            letterId = it.getString(LETTER).toString()
+        }
     }
 
     override fun onCreateView(
@@ -39,13 +42,8 @@ class WordListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         recyclerView = binding.recyclerView
 
-        // Retrieve the LETTER from the Intent extras
-        // intent.extras.getString returns String? (String or null)
-        // so toString() guarantees that the value will be a String
-        val letterId = activity?.intent?.extras?.getString(LETTER).toString()
-
         recyclerView.layoutManager = LinearLayoutManager(context)
-        recyclerView.adapter = WordAdapter(letterId, this.requireContext())
+        recyclerView.adapter = WordAdapter(letterId, requireContext())
 
         // Adds a [DividerItemDecoration] between items
         recyclerView.addItemDecoration(
